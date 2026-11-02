@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: phantomvault-scripture-studio
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn -w 2 -b 0.0.0.0:$PORT run:app
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: SECRET_KEY
+        generateValue: true
+      - key: APP_BASE_URL
+        sync: false
+      - key: BIBLE_PROVIDER
+        value: not-configured
+      - key: BIBLE_SOURCE_URL
+        sync: false
